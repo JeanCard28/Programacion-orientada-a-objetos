@@ -1,0 +1,57 @@
+class Personaje:
+
+    def __init__(self, nombre, fuerza, inteligencia, defensa, vida):
+        self.nombre = nombre
+        self.fuerza = fuerza
+        self.inteligencia = inteligencia
+        self.defensa = defensa
+        self.vida = vida
+
+    def mostrar_estadisticas(self):
+        print(self.nombre, ":", sep="")
+        print("·Fuerza:", self.fuerza)
+        print("·Inteligencia:", self.inteligencia)
+        print("·Defensa:", self.defensa)
+        print("·Vida:", self.vida)
+
+    def subir_nivel(self, fuerza, inteligencia, defensa):
+        self.fuerza += fuerza
+        self.inteligencia += inteligencia
+        self.defensa += defensa
+
+    def esta_vivo(self):
+        return self.vida > 0
+
+    def morir(self):
+        self.vida = 0
+        print(self.nombre, "ha muerto")
+
+    def calcular_dano(self, enemigo):
+        return self.fuerza - enemigo.defensa
+
+    def atacar(self, enemigo):
+        dano = self.calcular_dano(enemigo)
+        enemigo.vida -= dano
+        print(f"{self.nombre} ha realizado {dano} puntos de daño a {enemigo.nombre}")
+        if enemigo.esta_vivo():
+            print(f"Vida de {enemigo.nombre} es {enemigo.vida}")
+        else:
+            enemigo.morir()
+
+
+class Hechicero(Personaje):
+
+    def __init__(self, nombre, fuerza, inteligencia, defensa, vida, varita):
+        super().__init__(nombre, fuerza, inteligencia, defensa, vida)
+        self.varita = varita
+
+    def mostrar_estadisticas(self):
+        super().mostrar_estadisticas()
+        print("·Varita:", self.varita)
+
+    def calcular_dano(self, enemigo):
+        return self.inteligencia * self.varita - enemigo.defensa
+
+
+
+
