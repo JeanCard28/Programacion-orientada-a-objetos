@@ -1,14 +1,18 @@
-from modelos.empleado import Empleado
-from modelos.empleado_tiempo_completo import EmpleadoTiempoCompleto
-from servicios.gestion_empleados import GestionEmpleados
+"""
+Programa principal
+Demuestra el uso de POO: herencia, encapsulación y polimorfismo.
+"""
 
-# Crear instancias de las clases
-empleado1 = Empleado("Juan", 500)
-empleado2 = EmpleadoTiempoCompleto("María", 800, 200)
+from modelos.persona import Persona
+from modelos.estudiante import Estudiante
+from servicios.gestion_estudiantes import GestionEstudiantes
 
-# Servicio de gestión
-gestion = GestionEmpleados()
+# Creación de objetos
+persona1 = Persona("Carlos", 30)
+estudiante1 = Estudiante("Ana", 20, 8.9)
 
-# Demostración del funcionamiento
-gestion.mostrar_pago(empleado1)
-gestion.mostrar_pago(empleado2)
+# Uso del servicio
+gestion = GestionEstudiantes()
+
+gestion.mostrar_informacion(persona1)
+gestion.mostrar_informacion(estudiante1)
