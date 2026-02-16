@@ -1,0 +1,17 @@
+# Sistema de Gestión de Inventarios
+
+## Funcionalidades
+- Añadir productos
+- Eliminar productos
+- Actualizar cantidad y precio
+- Búsqueda por nombre
+- Listado completo del inventario
+
+## Arquitectura
+- modelos/: entidades del sistema
+- servicios/: lógica de negocio
+- main.py: interfaz de consola
+
+## Ejecución
+```bash
+python main.py
