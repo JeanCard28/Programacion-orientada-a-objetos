@@ -1,11 +1,9 @@
-# main.py
-
 from modelos.producto import Producto
 from servicios.inventario import Inventario
 
 
 def menu():
-    print("\n===== SISTEMA DE INVENTARIO =====")
+    print("\n===== SISTEMA INVENTARIO =====")
     print("1. Añadir producto")
     print("2. Eliminar producto")
     print("3. Actualizar producto")
@@ -19,10 +17,10 @@ def main():
 
     while True:
         menu()
-        opcion = input("Seleccione una opción: ")
+        opcion = input("Seleccione opción: ")
 
-        if opcion == "1":
-            try:
+        try:
+            if opcion == "1":
                 id_p = input("ID: ")
                 nombre = input("Nombre: ")
                 cantidad = int(input("Cantidad: "))
@@ -31,43 +29,38 @@ def main():
                 producto = Producto(id_p, nombre, cantidad, precio)
                 inventario.agregar_producto(producto)
 
-            except ValueError:
-                print("❌ Entrada inválida.")
+            elif opcion == "2":
+                inventario.eliminar_producto(input("ID: "))
 
-        elif opcion == "2":
-            id_p = input("ID del producto a eliminar: ")
-            inventario.eliminar_producto(id_p)
+            elif opcion == "3":
+                id_p = input("ID: ")
+                cantidad = input("Nueva cantidad: ")
+                precio = input("Nuevo precio: ")
 
-        elif opcion == "3":
-            id_p = input("ID del producto a actualizar: ")
+                cantidad = int(cantidad) if cantidad else None
+                precio = float(precio) if precio else None
 
-            cantidad = input("Nueva cantidad (enter para omitir): ")
-            precio = input("Nuevo precio (enter para omitir): ")
+                inventario.actualizar_producto(id_p, cantidad, precio)
 
-            cantidad = int(cantidad) if cantidad else None
-            precio = float(precio) if precio else None
+            elif opcion == "4":
+                nombre = input("Buscar nombre: ")
+                resultados = inventario.buscar_producto(nombre)
 
-            inventario.actualizar_producto(id_p, cantidad, precio)
-
-        elif opcion == "4":
-            nombre = input("Nombre a buscar: ")
-            resultados = inventario.buscar_producto(nombre)
-
-            if resultados:
                 for p in resultados:
                     print(p)
+
+            elif opcion == "5":
+                inventario.mostrar_inventario()
+
+            elif opcion == "6":
+                print("👋 Sistema finalizado.")
+                break
+
             else:
-                print("❌ No se encontraron productos.")
+                print("❌ Opción inválida.")
 
-        elif opcion == "5":
-            inventario.mostrar_inventario()
-
-        elif opcion == "6":
-            print("👋 Saliendo del sistema...")
-            break
-
-        else:
-            print("❌ Opción inválida.")
+        except ValueError:
+            print("❌ Error: entrada numérica inválida.")
 
 
 if __name__ == "__main__":
